@@ -1,0 +1,80 @@
+---
+import Link from "~/components/base/Link.astro";
+import { getUrl } from "~/utils/common";
+import { SITE } from "~/config";
+
+const title = `${SITE.author} @ ${new URL(SITE.website).hostname}`;
+---
+
+<Link
+  class="link op-transition"
+  href={getUrl("/")}
+  {title}
+  aria-current={Astro.url.pathname === `${getUrl("/")}` ? "page" : false}
+>
+  <div class="logo-container">
+    <div
+      class="text-4xl lt-sm:mt-0.3 draw fill-[#fdfdfd] stroke-[#fdfdfd] whitespace-nowrap"
+    >
+      <span class="font-dancingEn">Beyond Xin</span>
+      <!-- <span class="font-dancingZh">欣</span> -->
+    </div>
+  </div>
+</Link>
+
+<style>
+  .link {
+    /* opacity: 1; */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 767.9px) {
+    .logo-container {
+      transform-origin: 0%;
+      transform: scale(0.95);
+    }
+  }
+
+  .logo-container svg {
+    height: 2rem;
+  }
+
+  @keyframes grow {
+    0% {
+      stroke-dashoffset: 1px;
+      stroke-dasharray: 350px 0;
+    }
+    20% {
+      stroke-dasharray: 0 350px;
+    }
+    80% {
+      stroke-dasharray: 0 350px;
+    }
+    to {
+      stroke-dasharray: 350px 0;
+    }
+  }
+
+  .draw {
+    stroke-dashoffset: 1px;
+    stroke-dasharray: 350px 0;
+    animation: grow 10s ease forwards infinite;
+  }
+
+  @media (prefers-reduced-motion), print {
+    .draw {
+      stroke-dasharray: unset !important;
+      animation: none !important;
+    }
+  }
+</style>
