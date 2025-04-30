@@ -1,0 +1,15 @@
+---
+import Link from '~/components/base/Link.astro'
+import { SITE } from '~/config'
+
+const currentYear = new Date().getFullYear()
+const copyrightText = `© ${currentYear} ${SITE.author}`
+---
+
+<footer class="slide-enter animate-delay-1600! px-7 mt-auto mb-8">
+  <div class="prose mx-auto op-50">
+    <div class="absolute left-1/2 transform -translate-x-1/2 text-sm text-center select-none op-50">
+        <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2023033867号</a>
+    </div>
+  </div>
+</footer>

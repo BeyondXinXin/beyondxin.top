@@ -1,0 +1,33 @@
+---
+title: 作品集
+toc: true
+ogImage: true
+---
+
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import StandardLayout from '~/layouts/StandardLayout.astro'
+import GroupView from '~/components/views/GroupView.astro'
+import Link from '~/components/base/Link.astro'
+import CardView from '~/components/views/CardView.astro'
+
+import { getUrl } from '~/utils/common'
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  bgType={frontmatter.bgType}
+  ogImage={frontmatter.ogImage}
+>
+  <StandardLayout
+    class="max-w-300"
+    title={frontmatter.title}
+    isCentered={true}
+  >
+
+    <GroupView pageToc={frontmatter.toc} />
+  </StandardLayout>
+
+</BaseLayout>
+
+
+
