@@ -65,6 +65,14 @@
         "icon": "i-eva:music-fill"
       }
     ],
+    "游戏": [
+      {
+        "name": "末法守灵录",
+        "link": "https://survivor.beyondxin.top/",
+        "desc": "末世觉醒守护灵泉，传承希望迎接新生。",
+        "icon": "i-cbi:gamecube"
+      }
+    ],
     "Go": [
       {
         "name": "NixVis",
