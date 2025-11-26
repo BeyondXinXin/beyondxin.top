@@ -50,8 +50,9 @@ export const UI: Ui = {
     mergeOnMobile: true,
   },
   tabbedLayoutTabs: [
-    { title: '网站', path: '/projects' },
-    { title: '作品集', path: '/highlights' },
+    { title: '博客', path: '/blog' },
+    { title: 'Books', link: 'https://books.beyondxin.top/' },
+    { title: 'Notes', link: 'https://notes.beyondxin.top/' },
   ],
   groupView: {
     maxGroupColumns: 3,

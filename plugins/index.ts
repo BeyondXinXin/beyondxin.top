@@ -3,8 +3,6 @@ import remarkDirective from 'remark-directive'
 import remarkDirectiveSugar from 'remark-directive-sugar'
 import remarkImgattr from 'remark-imgattr'
 import remarkMath from 'remark-math'
-import remarkReadingTime from './remark-reading-time'
-import remarkGenerateOgImage from './remark-generate-og-image'
 
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeCallouts from 'rehype-callouts'
@@ -55,10 +53,6 @@ export const remarkPlugins: RemarkPlugins = [
   remarkImgattr,
   // https://github.com/remarkjs/remark-math/tree/main/packages/remark-math
   remarkMath,
-  remarkReadingTime,
-  ...(Array.isArray(FEATURES.ogImage) && FEATURES.ogImage[0]
-    ? [remarkGenerateOgImage]
-    : []),
 ]
 
 export const rehypePlugins: RehypePlugins = [
