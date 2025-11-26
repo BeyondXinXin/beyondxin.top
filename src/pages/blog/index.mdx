@@ -6,6 +6,7 @@ ogImage: false
 
 import BaseLayout from '~/layouts/BaseLayout.astro'
 import StandardLayout from '~/layouts/StandardLayout.astro'
+import TabbedLayout from '~/layouts/TabbedLayout.astro'
 import ListView from '~/components/views/ListView.astro'
 
 <BaseLayout
@@ -14,11 +15,11 @@ import ListView from '~/components/views/ListView.astro'
   bgType={frontmatter.bgType}
   ogImage={frontmatter.ogImage}
 >
-  <StandardLayout
+  <TabbedLayout
     class="prose"
     title={frontmatter.title}
     subtitle={frontmatter.subtitle}
   >
     <ListView collectionType="blog" pageToc={frontmatter.toc} />
-  </StandardLayout>
+  </TabbedLayout>
 </BaseLayout>

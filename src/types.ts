@@ -365,20 +365,19 @@ export interface NavBarLayout {
   mergeOnMobile: boolean
 }
 
-interface Tab {
-  /**
-   * Sets the navigation path associated with the tab, which must start with `/`.
-   *
-   * @example
-   * '/blog'、'/blog/'
-   */
-  path: Path
-
-  /**
-   * Sets the content displayed on hover for accessibility.
-   */
+interface BaseTab {
   title: string
 }
+
+interface InternalTab extends BaseTab {
+  path: Path
+}
+
+interface ExternalTab extends BaseTab {
+  link: Url
+}
+
+type Tab = InternalTab | ExternalTab
 
 export type Tabs = [Tab, Tab, ...Tab[]]
 

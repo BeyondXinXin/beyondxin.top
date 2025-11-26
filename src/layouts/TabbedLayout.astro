@@ -1,52 +1,63 @@
 ---
-import Link from '~/components/base/Link.astro'
-import { ensureTrailingSlash, getUrl } from '~/utils/common'
-import { UI } from '~/config'
+import Link from "~/components/base/Link.astro";
+import { ensureTrailingSlash, getUrl } from "~/utils/common";
+import { UI } from "~/config";
 
-import type { Tabs } from '~/types'
+import type { Tabs } from "~/types";
 
 interface Props {
-  subtitle?: string
+  subtitle?: string;
 }
 
-const { subtitle } = Astro.props
+const { subtitle } = Astro.props;
 
-let tabs: Tabs
+let tabs: Tabs;
 if (
   !UI.tabbedLayoutTabs ||
   (Array.isArray(UI.tabbedLayoutTabs) && UI.tabbedLayoutTabs.length === 0)
 ) {
-  throw new Error('`UI.tabbedLayoutTabs`` is not configured.')
+  throw new Error("`UI.tabbedLayoutTabs` is not configured.");
 } else {
-  tabs = UI.tabbedLayoutTabs
+  tabs = UI.tabbedLayoutTabs;
 }
 
-const currentPath = ensureTrailingSlash(Astro.url.pathname)
-const isActive = (href: string) =>
-  currentPath === getUrl(ensureTrailingSlash(href))
+const currentPath = ensureTrailingSlash(Astro.url.pathname);
+
+const isInternalTab = (
+  tab: (typeof tabs)[number],
+): tab is { title: string; path: string } => {
+  return "path" in tab;
+};
+
+const isActive = (tab: (typeof tabs)[number]) => {
+  if (!isInternalTab(tab)) return false;
+  return currentPath === getUrl(ensureTrailingSlash(tab.path));
+};
+
+const getHref = (tab: (typeof tabs)[number]) => {
+  return isInternalTab(tab) ? getUrl(ensureTrailingSlash(tab.path)) : tab.link;
+};
 ---
 
 <nav id="nav-tabs" class="prose mx-auto mb-8" aria-label="Page sections">
   <div
-    u-flex="~ gap-3 lt-sm:(col wrap gap-1)"
-    class="mb-0 text-3xl select-none"
+    u-flex="~ gap-8 lt-sm:(col wrap gap-1)"
+    class="m-0 text-4xl font-bold"
     role="tablist"
   >
     {
       tabs.map((tab) => (
         <Link
           class:list={{
-            'link op-transition!': true,
-            'active': isActive(tab.path),
-            'inactive': !isActive(tab.path),
+            "link op-transition!": true,
+            active: isActive(tab),
+            inactive: !isActive(tab),
           }}
-          href={getUrl(ensureTrailingSlash(tab.path))}
+          href={getHref(tab)}
           role="tab"
-          aria-current={
-            Astro.url.pathname === getUrl(ensureTrailingSlash(tab.path))
-              ? 'page'
-              : false
-          }
+          aria-current={isActive(tab) ? "page" : false}
+          target={isInternalTab(tab) ? undefined : "_blank"}
+          rel={isInternalTab(tab) ? undefined : "noopener noreferrer"}
         >
           {tab.title}
         </Link>

@@ -1,32 +1,6 @@
 {
   "$schema": "../../../.astro/collections/projects.schema.json",
   "projects": {
-    "网站": [
-      {
-        "name": "YiHangPavilion",
-        "link": "https://navigation.beyondxin.top/",
-        "desc": "一个个人定制的工作台，简洁、高效，完全为自己量身打造",
-        "icon": "i-ix:navigation-filled"
-      },
-      {
-        "name": "💻 Beyond欣 's Notes",
-        "link": "https://notes.beyondxin.top",
-        "desc": "专注于重要的事，才能拥有真正的自由！",
-        "icon": "i-twemoji:laptop-computer"
-      },
-      {
-        "name": "📚 不那么正经的读书笔记",
-        "link": "https://books.beyondxin.top",
-        "desc": "探索书籍的非正式角落，分享随性而深刻的阅读体验。",
-        "icon": "i-fluent-color:book-48"
-      },
-      {
-        "name": "NixVis",
-        "link": "https://nixvis.beyondxin.top/",
-        "desc": "Nginx 网站日志分析工具",
-        "icon": "i-cbi:nginx"
-      }
-    ],
     "Qt": [
       {
         "name": "AI.xyz",
@@ -89,9 +63,9 @@
         "icon": "i-ix:navigation-filled"
       },
       {
-        "name": "UnconventionalReadingNotes",
+        "name": "📚 不那么正经的读书笔记",
         "link": "https://github.com/BeyondXinXin/UnconventionalReadingNotes",
-        "desc": "基于 Astro 构建的个人网站",
+        "desc": "探索书籍的非正式角落，分享随性而深刻的阅读体验。",
         "icon": "i-lineicons:astro"
       },
       {
