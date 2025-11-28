@@ -1,0 +1,15 @@
+---
+import PostListMeta from '~/components/PostListMeta.astro'
+import type { Post } from '~/types'
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+---
+
+<article class="prose">
+  <PostListMeta post={post} />
+  <slot />
+</article>

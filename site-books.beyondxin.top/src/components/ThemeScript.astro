@@ -1,0 +1,38 @@
+---
+import { themeConfig } from "~/.config";
+
+const theme = themeConfig.appearance.theme;
+---
+
+<script is:inline define:vars={{ theme }}>
+  function updateTheme(theme) {
+    // 首先检查用户是否有存储的主题偏好
+    const storedTheme = localStorage.getItem('theme');
+    
+    if (storedTheme) {
+      // 如果用户有存储的偏好，使用该偏好
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+    } else if (theme === "system") {
+      // 如果没有存储的偏好且配置为系统主题，检查系统偏好
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      document.documentElement.classList.toggle("dark", prefersDark);
+    } else {
+      // 使用配置的主题
+      document.documentElement.classList.toggle("dark", theme === "dark");
+    }
+  }
+
+  // 初始化主题
+  updateTheme(theme);
+
+  // 监听系统主题变化
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (theme === "system" && !localStorage.getItem('theme')) {
+        document.documentElement.classList.toggle("dark", e.matches);
+      }
+    });
+</script>
