@@ -1,0 +1,3 @@
+[submodule "MyNote"]
+	path = MyNote
+	url = https://github.com/BeyondXinXin/MyNote.git
