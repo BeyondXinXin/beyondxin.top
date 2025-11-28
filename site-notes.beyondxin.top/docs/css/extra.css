@@ -1,0 +1,7 @@
+.md-search {
+    transform: translateX(160px);
+}
+
+.md-header__option[data-md-component="palette"] {
+    transform: translateX(160px);
+}
