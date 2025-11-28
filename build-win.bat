@@ -43,4 +43,5 @@ call pnpm build
 if exist ..\out\beyondxin.top rmdir /S /Q ..\out\beyondxin.top
 xcopy /E /I /Y .\dist ..\out\beyondxin.top
 
+cd /d %~dp0
 pause
