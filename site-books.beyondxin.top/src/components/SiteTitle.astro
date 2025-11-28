@@ -1,0 +1,19 @@
+---
+import { themeConfig } from "~/.config";
+
+const { title, subtitle } = themeConfig.site;
+---
+
+<hgroup
+  class="cursor-pointer ease-in-out items-start flex flex-col
+  gap-2.5 border-l-2 border-l-primary write-vertical-right"
+>
+  <a
+    class="not-underline-hover ease-in-out px-2.5 pb-4 pl-2
+    hover:bg-primary pt-3 hover:text-background"
+    href="/"
+  >
+    <h3 class="text-6 font-extrabold font-header">{subtitle}</h3>
+    <h1 class="text-10 font-extrabold font-header">{title}</h1>
+  </a>
+</hgroup>

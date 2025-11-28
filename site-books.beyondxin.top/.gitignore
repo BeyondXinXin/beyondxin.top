@@ -1,0 +1,4 @@
+dist/
+.astro/
+.netlify/
+node_modules/

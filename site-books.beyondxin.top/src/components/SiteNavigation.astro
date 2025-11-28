@@ -1,0 +1,50 @@
+---
+import { themeConfig } from '~/.config'
+
+const { navLinks, socialLinks } = themeConfig.site
+const { translate: t } = Astro.locals
+---
+
+<nav class="text-center font-bold" flex="~ col gap-4">
+
+  <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
+
+    {
+    navLinks.map((nav) => (
+    <li>
+      <a class="" href={nav.href}>
+        {t(nav.name)}
+      </a>
+    </li>
+    ))
+    }
+    <li>
+      <button id="theme-toggle" title="切换主题" class="px-1 not-underline-hover inline-flex items-center justify-center">
+        <span class="i-mdi-brightness-4 dark:i-mdi-brightness-7" style="width: 24px; height: 24px;"></span>
+      </button>
+    </li>
+  </ul>
+
+  <ul flex="~ row gap-1 justify-center">
+    {
+    socialLinks.map(({ href, name }) => (
+    <li>
+      <a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
+        <span class:list={[`i-mdi-${name}`, 'w-6 h-6' ]}>{name}</span>
+      </a>
+    </li>
+    ))
+    }
+  </ul>
+
+</nav>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    document.documentElement.classList.toggle('dark', !isDark);
+    localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+  });
+</script>
