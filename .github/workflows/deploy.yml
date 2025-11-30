@@ -43,7 +43,7 @@ jobs:
           source: "site-notes.beyondxin.top/site/*"
           target: "/home/www/html/notes.beyondxin.top"
           strip_components: 2
-          rm: true
+          overwrite: true
 
   books:
     runs-on: ubuntu-latest
@@ -82,7 +82,7 @@ jobs:
           source: "site-books.beyondxin.top/dist/*"
           target: "/home/www/html/books.beyondxin.top"
           strip_components: 2
-          rm: true
+          overwrite: true
 
   main:
     runs-on: ubuntu-latest
@@ -121,4 +121,4 @@ jobs:
           source: "site-beyondxin.top/dist/*"
           target: "/home/www/html/beyondxin.top"
           strip_components: 2
-          rm: true
+          overwrite: true
