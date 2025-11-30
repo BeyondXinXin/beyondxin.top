@@ -42,6 +42,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "site-notes.beyondxin.top/site/*"
           target: "/home/www/html/notes.beyondxin.top"
+          strip_components: 2
+          rm: true
 
   books:
     runs-on: ubuntu-latest
@@ -79,6 +81,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "site-books.beyondxin.top/dist/*"
           target: "/home/www/html/books.beyondxin.top"
+          strip_components: 2
+          rm: true
 
   main:
     runs-on: ubuntu-latest
@@ -116,3 +120,5 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "site-beyondxin.top/dist/*"
           target: "/home/www/html/beyondxin.top"
+          strip_components: 2
+          rm: true
