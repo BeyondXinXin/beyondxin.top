@@ -23,6 +23,18 @@ jobs:
         run: |
           git submodule foreach git fetch origin
           git submodule foreach git reset --hard origin/HEAD
+      - name: Prepare notes content
+        run: |
+          mkdir -p site-notes.beyondxin.top/docs
+          cp -r MyNote/.space site-notes.beyondxin.top/docs/
+          cp -r MyNote/Qt site-notes.beyondxin.top/docs/
+          cp -r MyNote/Vtk site-notes.beyondxin.top/docs/
+          cp -r MyNote/C++ site-notes.beyondxin.top/docs/
+          cp -r MyNote/编程 site-notes.beyondxin.top/docs/
+          cp -r MyNote/数据结构与算法 site-notes.beyondxin.top/docs/
+          cp -r MyNote/运维 site-notes.beyondxin.top/docs/
+          cp -r MyNote/系统 site-notes.beyondxin.top/docs/
+          cp -r MyNote/我的项目 site-notes.beyondxin.top/docs/
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
