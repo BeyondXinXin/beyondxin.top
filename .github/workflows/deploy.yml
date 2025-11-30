@@ -20,7 +20,9 @@ jobs:
         with:
           submodules: recursive
       - name: Update submodules to latest remote commit
-        run: git submodule update --remote --merge
+        run: |
+          git submodule foreach git fetch origin
+          git submodule foreach git reset --hard origin/HEAD
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -54,7 +56,9 @@ jobs:
         with:
           submodules: recursive
       - name: Update submodules to latest remote commit
-        run: git submodule update --remote --merge
+        run: |
+          git submodule foreach git fetch origin
+          git submodule foreach git reset --hard origin/HEAD
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
@@ -88,7 +92,9 @@ jobs:
         with:
           submodules: recursive
       - name: Update submodules to latest remote commit
-        run: git submodule update --remote --merge
+        run: |
+          git submodule foreach git fetch origin
+          git submodule foreach git reset --hard origin/HEAD
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
