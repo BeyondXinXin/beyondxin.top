@@ -39,12 +39,30 @@
         "icon": "i-eva:music-fill"
       }
     ],
-    "游戏": [
+    "前端": [
       {
-        "name": "末法守灵录",
-        "link": "https://survivor.beyondxin.top/",
-        "desc": "末世觉醒守护灵泉，传承希望迎接新生。",
-        "icon": "i-cbi:gamecube"
+        "name": "YiHangPavilion",
+        "link": "https://notes.beyondxin.top/我的项目/YiHangPavilion.html",
+        "desc": "一个个人定制的工作台，简洁、高效，完全为自己量身打造",
+        "icon": "i-ix:navigation-filled"
+      },
+      {
+        "name": "📚 读书笔记",
+        "link": "https://books.beyondxin.top",
+        "desc": "探索书籍的非正式角落，分享随性而深刻的阅读体验。",
+        "icon": "i-lineicons:astro"
+      },
+      {
+        "name": "📝 笔记",
+        "link": "https://notes.beyondxin.top",
+        "desc": "专注于重要的事，才能拥有真正的自由！",
+        "icon": "i-lineicons:astro"
+      },
+      {
+        "name": "博客",
+        "link": "https://beyondxin.top",
+        "desc": "基于 Astro 构建的个人网站",
+        "icon": "i-lineicons:astro"
       }
     ],
     "Go": [
@@ -55,24 +73,12 @@
         "icon": "i-cbi:nginx"
       }
     ],
-    "前端": [
+    "游戏": [
       {
-        "name": "YiHangPavilion",
-        "link": "https://notes.beyondxin.top/我的项目/YiHangPavilion.html",
-        "desc": "一个个人定制的工作台，简洁、高效，完全为自己量身打造",
-        "icon": "i-ix:navigation-filled"
-      },
-      {
-        "name": "📚 不那么正经的读书笔记",
-        "link": "https://github.com/BeyondXinXin/UnconventionalReadingNotes",
-        "desc": "探索书籍的非正式角落，分享随性而深刻的阅读体验。",
-        "icon": "i-lineicons:astro"
-      },
-      {
-        "name": "beyondxin.top",
-        "link": "https://github.com/BeyondXinXin/beyondxin.top",
-        "desc": "基于 Astro 构建的个人网站",
-        "icon": "i-lineicons:astro"
+        "name": "末法守灵录",
+        "link": "https://survivor.beyondxin.top/",
+        "desc": "末世觉醒守护灵泉，传承希望迎接新生。",
+        "icon": "i-cbi:gamecube"
       }
     ]
   }
