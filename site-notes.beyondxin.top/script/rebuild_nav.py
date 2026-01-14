@@ -27,7 +27,9 @@ def get_page_tree(relative_path=""):
         if key in ignore_directory:
             break
         if key.endswith('.md'):
-            page_tree.append(key)
+            file_path = base_directory + key
+            if os.path.exists(file_path):
+                page_tree.append(key)
         else:
             subtree = get_page_tree(key+"/")
             if subtree:

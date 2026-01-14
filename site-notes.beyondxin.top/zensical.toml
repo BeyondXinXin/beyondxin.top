@@ -160,6 +160,7 @@ nav = [
             "Vtk/重建/三维重建.md",
         ] },
         { "体渲染" = [
+            "Vtk/体渲染/CT仿真X射线成像.md",
             "Vtk/体渲染/体绘制.md",
             "Vtk/体渲染/体渲染绘制地球.md",
             "Vtk/体渲染/体绘制剪裁.md",
@@ -181,65 +182,14 @@ nav = [
     ] },
     { "C++" = [
         { "VisualStudio配置" = [
+            "C++/VisualStudio配置/启动Cmake项目支持自定义Path.md",
+            "C++/VisualStudio配置/VS2026.md",
             "C++/VisualStudio配置/VS与CUDA集成.md",
             "C++/VisualStudio配置/GithubCopilot无提示.md",
             "C++/VisualStudio配置/文本编辑器设置.md",
             "C++/VisualStudio配置/隐藏不必要代码提示.md",
             "C++/VisualStudio配置/集成uncrustify.md",
             "C++/VisualStudio配置/插件.md",
-            "C++/VisualStudio配置/VS2026.md",
-        ] },
-        { "开源库" = [
-            { "CMake" = [
-                "C++/开源库/CMake/CMake常用指令.md",
-                "C++/开源库/CMake/同时编译静态库和动态库.md",
-                "C++/开源库/CMake/多个工程共享变量.md",
-                "C++/开源库/CMake/批量生成可执行程序.md",
-                "C++/开源库/CMake/根据不同参数编译不同程序.md",
-                "C++/开源库/CMake/版本管理.md",
-                "C++/开源库/CMake/组织项目列表.md",
-                "C++/开源库/CMake/编译生成第三方库.md",
-                "C++/开源库/CMake/设置可执行程序类型.md",
-                "C++/开源库/CMake/错误排查.md",
-            ] },
-            { "DCMTK" = [
-                "C++/开源库/DCMTK/DCM标签可视化.md",
-                "C++/开源库/DCMTK/PACS.md",
-                "C++/开源库/DCMTK/修改UID.md",
-                "C++/开源库/DCMTK/dcm转图片.md",
-                "C++/开源库/DCMTK/控制台信息过多.md",
-                "C++/开源库/DCMTK/编译安装.md",
-            ] },
-            { "CGAL" = [
-                "C++/开源库/CGAL/OFF转STL.md",
-                "C++/开源库/CGAL/编译安装.md",
-                "C++/开源库/CGAL/提取中心线.md",
-                "C++/开源库/CGAL/自相交检测.md",
-                "C++/开源库/CGAL/表面细化.md",
-                "C++/开源库/CGAL/补洞.md",
-            ] },
-            { "ITK" = [
-                "C++/开源库/ITK/操作dcm标签.md",
-                "C++/开源库/ITK/多张图转mha.md",
-                "C++/开源库/ITK/最短路径提取.md",
-            ] },
-            { "LibTorch" = [
-                "C++/开源库/LibTorch/模型推理.md",
-            ] },
-            { "OpenCV" = [
-                "C++/开源库/OpenCV/Mat转QImage.md",
-                "C++/开源库/OpenCV/提取连通域.md",
-                "C++/开源库/OpenCV/通道分离、合并.md",
-                "C++/开源库/OpenCV/错误排查.md",
-                "C++/开源库/OpenCV/求线段切线和垂线.md",
-            ] },
-            { "MITK" = [
-                "C++/开源库/MITK/MITK交互.md",
-                "C++/开源库/MITK/解决CTK和BlueBerry链接问题.md",
-            ] },
-            "C++/开源库/FFmpeg.md",
-            "C++/开源库/Halcon.md",
-            "C++/开源库/RCF.md",
         ] },
         { "面试" = [
             { "C++关键字" = [
@@ -264,7 +214,99 @@ nav = [
                 "C++/面试/数据结构与算法/Qt数据结构实现.md",
                 "C++/面试/数据结构与算法/解决哈希冲突的办法.md",
             ] },
+            { "开源库" = [
+                { "MITK" = [
+                    "开源库/MITK/MITK交互.md",
+                    "开源库/MITK/解决CTK和BlueBerry链接问题.md",
+                ] },
+                { "OpenCV" = [
+                    "开源库/OpenCV/Mat转QImage.md",
+                    "开源库/OpenCV/求线段切线和垂线.md",
+                    "开源库/OpenCV/通道分离、合并.md",
+                    "开源库/OpenCV/提取连通域.md",
+                    "开源库/OpenCV/错误排查.md",
+                ] },
+                { "ITK" = [
+                    "开源库/ITK/操作dcm标签.md",
+                    "开源库/ITK/多张图转mha.md",
+                    "开源库/ITK/最短路径提取.md",
+                ] },
+                { "DCMTK" = [
+                    "开源库/DCMTK/DCM标签可视化.md",
+                    "开源库/DCMTK/修改UID.md",
+                    "开源库/DCMTK/PACS.md",
+                    "开源库/DCMTK/dcm转图片.md",
+                    "开源库/DCMTK/控制台信息过多.md",
+                    "开源库/DCMTK/编译安装.md",
+                ] },
+                { "CGAL" = [
+                    "开源库/CGAL/OFF转STL.md",
+                    "开源库/CGAL/自相交检测.md",
+                    "开源库/CGAL/提取中心线.md",
+                    "开源库/CGAL/编译安装.md",
+                    "开源库/CGAL/补洞.md",
+                    "开源库/CGAL/表面细化.md",
+                ] },
+                { "LibTorch" = [
+                    "开源库/LibTorch/模型推理.md",
+                ] },
+                "开源库/RCF.md",
+                "开源库/FFmpeg.md",
+                "开源库/Halcon.md",
+            ] },
         ] },
+        { "CMake" = [
+            "C++/CMake/CMake常用指令.md",
+            "C++/CMake/同时编译静态库和动态库.md",
+            "C++/CMake/多个工程共享变量.md",
+            "C++/CMake/批量生成可执行程序.md",
+            "C++/CMake/根据不同参数编译不同程序.md",
+            "C++/CMake/版本管理.md",
+            "C++/CMake/编译生成第三方库.md",
+            "C++/CMake/组织项目列表.md",
+            "C++/CMake/设置可执行程序类型.md",
+            "C++/CMake/错误排查.md",
+        ] },
+    ] },
+    { "开源库" = [
+        { "MITK" = [
+            "开源库/MITK/MITK交互.md",
+            "开源库/MITK/解决CTK和BlueBerry链接问题.md",
+        ] },
+        { "OpenCV" = [
+            "开源库/OpenCV/Mat转QImage.md",
+            "开源库/OpenCV/求线段切线和垂线.md",
+            "开源库/OpenCV/通道分离、合并.md",
+            "开源库/OpenCV/提取连通域.md",
+            "开源库/OpenCV/错误排查.md",
+        ] },
+        { "ITK" = [
+            "开源库/ITK/操作dcm标签.md",
+            "开源库/ITK/多张图转mha.md",
+            "开源库/ITK/最短路径提取.md",
+        ] },
+        { "DCMTK" = [
+            "开源库/DCMTK/DCM标签可视化.md",
+            "开源库/DCMTK/修改UID.md",
+            "开源库/DCMTK/PACS.md",
+            "开源库/DCMTK/dcm转图片.md",
+            "开源库/DCMTK/控制台信息过多.md",
+            "开源库/DCMTK/编译安装.md",
+        ] },
+        { "CGAL" = [
+            "开源库/CGAL/OFF转STL.md",
+            "开源库/CGAL/自相交检测.md",
+            "开源库/CGAL/提取中心线.md",
+            "开源库/CGAL/编译安装.md",
+            "开源库/CGAL/补洞.md",
+            "开源库/CGAL/表面细化.md",
+        ] },
+        { "LibTorch" = [
+            "开源库/LibTorch/模型推理.md",
+        ] },
+        "开源库/RCF.md",
+        "开源库/FFmpeg.md",
+        "开源库/Halcon.md",
     ] },
     { "编程" = [
         { "Git" = [
@@ -285,6 +327,7 @@ nav = [
             "编程/Go/GoRoutines.md",
         ] },
         { "前端" = [
+            "编程/前端/NVM.md",
             "编程/前端/Node项目配置.md",
             "编程/前端/Vue项目设置.md",
         ] },
@@ -307,6 +350,9 @@ nav = [
         ] },
         { "视觉优化" = [
             "编程/视觉优化/字体图标的使用.md",
+        ] },
+        { "python" = [
+            "编程/python/Miniconda.md",
         ] },
     ] },
     { "数据结构与算法" = [

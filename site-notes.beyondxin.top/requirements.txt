@@ -3,11 +3,11 @@ colorama==0.4.6
 deepmerge==2.0
 Markdown==3.10
 Pygments==2.19.2
-pymdown-extensions==10.17.1
+pymdown-extensions==10.20
 PyYAML==6.0.3
 setuptools==80.9.0
 toml==0.10.2
 tomlkit==0.13.3
 uv==0.9.11
 wheel==0.45.1
-zensical==0.0.9
+zensical==0.0.15
