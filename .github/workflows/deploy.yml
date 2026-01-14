@@ -30,6 +30,7 @@ jobs:
           cp -r MyNote/Qt site-notes.beyondxin.top/docs/
           cp -r MyNote/Vtk site-notes.beyondxin.top/docs/
           cp -r MyNote/C++ site-notes.beyondxin.top/docs/
+          cp -r MyNote/开源库 site-notes.beyondxin.top/docs/
           cp -r MyNote/编程 site-notes.beyondxin.top/docs/
           cp -r MyNote/数据结构与算法 site-notes.beyondxin.top/docs/
           cp -r MyNote/运维 site-notes.beyondxin.top/docs/
