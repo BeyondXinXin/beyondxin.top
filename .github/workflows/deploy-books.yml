@@ -1,0 +1,44 @@
+name: Deploy Books Site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  books:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH for private submodules
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GH_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Update submodules to latest remote commit
+        run: |
+          git submodule foreach git fetch origin
+          git submodule foreach git reset --hard origin/HEAD
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.21"
+      - name: Build books.beyondxin.top
+        run: |
+          cd site-books.beyondxin.top
+          npm install -g pnpm
+          pnpm install
+          pnpm build
+      - name: Upload books.beyondxin.top
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "site-books.beyondxin.top/dist/*"
+          target: "/home/www/html/books.beyondxin.top"
+          strip_components: 2
+          overwrite: true
