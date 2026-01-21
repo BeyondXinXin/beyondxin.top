@@ -40,6 +40,7 @@ nav = [
             "Qt/使用技巧/更改程序当前目录.md",
             "Qt/使用技巧/控件隐藏实现方式.md",
             "Qt/使用技巧/样式表.md",
+            "Qt/使用技巧/字体图标的使用.md",
             "Qt/使用技巧/字符串操作.md",
             "Qt/使用技巧/简单封包拆包协议.md",
             "Qt/使用技巧/生成pdf.md",
@@ -116,32 +117,27 @@ nav = [
         ] },
     ] },
     { "Vtk" = [
+        { "使用技巧" = [
+            "Vtk/使用技巧/骨磨削可视化.md",
+            "Vtk/使用技巧/绘制螺钉螺纹线.md",
+            "Vtk/使用技巧/适配触摸屏.md",
+            "Vtk/使用技巧/vtk各渲染窗口区别.md",
+            "Vtk/使用技巧/MPR每张图对应空间位置提示.md",
+            "Vtk/使用技巧/使用中文图例、标签.md",
+            "Vtk/使用技巧/多线程框架vtkMultiThreader.md",
+        ] },
         { "交互" = [
             "Vtk/交互/屏幕坐标转世界坐标.md",
             "Vtk/交互/多Actor单独交互.md",
             "Vtk/交互/多Actor绑定选中事件.md",
-            "Vtk/交互/交互.md",
-        ] },
-        { "使用技巧" = [
-            "Vtk/使用技巧/编译VTK.md",
-            "Vtk/使用技巧/MPR每张图对应空间位置提示.md",
-            "Vtk/使用技巧/调试时随时浏览模型、图像.md",
-            "Vtk/使用技巧/设置颜色缓冲.md",
-            "Vtk/使用技巧/绘制螺钉螺纹线.md",
-            "Vtk/使用技巧/vtk各渲染窗口区别.md",
-            "Vtk/使用技巧/使用中文图例、标签.md",
-            "Vtk/使用技巧/vtk图片显示.md",
-            "Vtk/使用技巧/多线程框架vtkMultiThreader.md",
-            "Vtk/使用技巧/适配触摸屏.md",
-            "Vtk/使用技巧/切换相机标准视角.md",
-            "Vtk/使用技巧/模型cell不同颜色.md",
-            "Vtk/使用技巧/无法移动手柄.md",
+            "Vtk/交互/切换相机标准视角.md",
         ] },
         { "类型转换" = [
             "Vtk/类型转换/三维模型转为二维切片.md",
-            "Vtk/类型转换/Dcm批量转png.md",
+            "Vtk/类型转换/读取QT资源文件.md",
+            "Vtk/类型转换/批量Dcm转png.md",
+            "Vtk/类型转换/dcm2vit.md",
             "Vtk/类型转换/vti转cvMat.md",
-            "Vtk/类型转换/dcm转vit.md",
             "Vtk/类型转换/vtp转vtu.md",
             "Vtk/类型转换/vtk转vtp.md",
         ] },
@@ -179,17 +175,24 @@ nav = [
             "Vtk/Widget/vtkRubberBand.md",
             "Vtk/Widget/vtkwidget剪裁.md",
         ] },
+        { "调试" = [
+            "Vtk/调试/调试时随时浏览模型、图像.md",
+            "Vtk/调试/模型cell不同颜色.md",
+            "Vtk/调试/vtk图片显示.md",
+            "Vtk/调试/无法移动手柄.md",
+            "Vtk/调试/设置颜色缓冲.md",
+            "Vtk/调试/编译VTK.md",
+        ] },
     ] },
     { "C++" = [
         { "VisualStudio配置" = [
-            "C++/VisualStudio配置/启动Cmake项目支持自定义Path.md",
+            "C++/VisualStudio配置/CMake配置.md",
             "C++/VisualStudio配置/VS2026.md",
+            "C++/VisualStudio配置/文本编辑器设置.md",
             "C++/VisualStudio配置/VS与CUDA集成.md",
             "C++/VisualStudio配置/GithubCopilot无提示.md",
-            "C++/VisualStudio配置/文本编辑器设置.md",
-            "C++/VisualStudio配置/隐藏不必要代码提示.md",
-            "C++/VisualStudio配置/集成uncrustify.md",
-            "C++/VisualStudio配置/插件.md",
+            "C++/VisualStudio配置/VS插件.md",
+            "C++/VisualStudio配置/VS外部工具.md",
         ] },
         { "面试" = [
             { "C++关键字" = [
@@ -215,6 +218,14 @@ nav = [
                 "C++/面试/数据结构与算法/解决哈希冲突的办法.md",
             ] },
             { "开源库" = [
+                { "CGAL" = [
+                    "开源库/CGAL/自相交检测.md",
+                    "开源库/CGAL/提取中心线.md",
+                    "开源库/CGAL/OFF转STL.md",
+                    "开源库/CGAL/编译安装.md",
+                    "开源库/CGAL/补洞.md",
+                    "开源库/CGAL/表面细化.md",
+                ] },
                 { "MITK" = [
                     "开源库/MITK/MITK交互.md",
                     "开源库/MITK/解决CTK和BlueBerry链接问题.md",
@@ -226,11 +237,6 @@ nav = [
                     "开源库/OpenCV/提取连通域.md",
                     "开源库/OpenCV/错误排查.md",
                 ] },
-                { "ITK" = [
-                    "开源库/ITK/操作dcm标签.md",
-                    "开源库/ITK/多张图转mha.md",
-                    "开源库/ITK/最短路径提取.md",
-                ] },
                 { "DCMTK" = [
                     "开源库/DCMTK/DCM标签可视化.md",
                     "开源库/DCMTK/修改UID.md",
@@ -239,13 +245,10 @@ nav = [
                     "开源库/DCMTK/控制台信息过多.md",
                     "开源库/DCMTK/编译安装.md",
                 ] },
-                { "CGAL" = [
-                    "开源库/CGAL/OFF转STL.md",
-                    "开源库/CGAL/自相交检测.md",
-                    "开源库/CGAL/提取中心线.md",
-                    "开源库/CGAL/编译安装.md",
-                    "开源库/CGAL/补洞.md",
-                    "开源库/CGAL/表面细化.md",
+                { "ITK" = [
+                    "开源库/ITK/操作dcm标签.md",
+                    "开源库/ITK/多张图转mha.md",
+                    "开源库/ITK/最短路径提取.md",
                 ] },
                 { "LibTorch" = [
                     "开源库/LibTorch/模型推理.md",
@@ -269,6 +272,14 @@ nav = [
         ] },
     ] },
     { "开源库" = [
+        { "CGAL" = [
+            "开源库/CGAL/自相交检测.md",
+            "开源库/CGAL/提取中心线.md",
+            "开源库/CGAL/OFF转STL.md",
+            "开源库/CGAL/编译安装.md",
+            "开源库/CGAL/补洞.md",
+            "开源库/CGAL/表面细化.md",
+        ] },
         { "MITK" = [
             "开源库/MITK/MITK交互.md",
             "开源库/MITK/解决CTK和BlueBerry链接问题.md",
@@ -280,11 +291,6 @@ nav = [
             "开源库/OpenCV/提取连通域.md",
             "开源库/OpenCV/错误排查.md",
         ] },
-        { "ITK" = [
-            "开源库/ITK/操作dcm标签.md",
-            "开源库/ITK/多张图转mha.md",
-            "开源库/ITK/最短路径提取.md",
-        ] },
         { "DCMTK" = [
             "开源库/DCMTK/DCM标签可视化.md",
             "开源库/DCMTK/修改UID.md",
@@ -293,13 +299,10 @@ nav = [
             "开源库/DCMTK/控制台信息过多.md",
             "开源库/DCMTK/编译安装.md",
         ] },
-        { "CGAL" = [
-            "开源库/CGAL/OFF转STL.md",
-            "开源库/CGAL/自相交检测.md",
-            "开源库/CGAL/提取中心线.md",
-            "开源库/CGAL/编译安装.md",
-            "开源库/CGAL/补洞.md",
-            "开源库/CGAL/表面细化.md",
+        { "ITK" = [
+            "开源库/ITK/操作dcm标签.md",
+            "开源库/ITK/多张图转mha.md",
+            "开源库/ITK/最短路径提取.md",
         ] },
         { "LibTorch" = [
             "开源库/LibTorch/模型推理.md",
@@ -319,6 +322,9 @@ nav = [
             "编程/Git/绑定ssh.md",
             "编程/Git/配置Hooks.md",
             "编程/Git/TortoiseGit使用openssh.md",
+        ] },
+        { "python" = [
+            "编程/python/Miniconda.md",
         ] },
         { "Go" = [
             "编程/Go/基本语法.md",
@@ -346,13 +352,6 @@ nav = [
         { "IDE" = [
             "编程/IDE/VSC远程链接使用copilot.md",
             "编程/IDE/Cmake配置(VSC).md",
-            "编程/IDE/IDE.md",
-        ] },
-        { "视觉优化" = [
-            "编程/视觉优化/字体图标的使用.md",
-        ] },
-        { "python" = [
-            "编程/python/Miniconda.md",
         ] },
     ] },
     { "数据结构与算法" = [
@@ -415,7 +414,6 @@ nav = [
             "系统/软件设置/IDE快捷键.md",
             "系统/软件设置/Windos装机.md",
             "系统/软件设置/Obsidian.md",
-            "系统/软件设置/软件设置.md",
             "系统/软件设置/浏览器插件.md",
         ] },
     ] },

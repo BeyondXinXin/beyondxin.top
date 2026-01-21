@@ -23,11 +23,14 @@ def get_context_bt_db(path):
 def get_page_tree(relative_path=""):
     page_tree = []
     order_tree = get_context_bt_db(base_directory + relative_path)
+
     for key in order_tree:
         if key in ignore_directory:
             break
         if key.endswith('.md'):
             file_path = base_directory + key
+            if relative_path not in file_path:
+                continue
             if os.path.exists(file_path):
                 page_tree.append(key)
         else:
