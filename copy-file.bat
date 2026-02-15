@@ -1,8 +1,6 @@
 chcp 65001
 
-git submodule update --init --recursive
-git submodule foreach git fetch origin
-git submodule foreach git reset --hard origin/HEAD
+git submodule update --init --remote --recursive
 
 if not exist site-beyondxin.top\src\content mkdir site-beyondxin.top\src\content
 if exist site-beyondxin.top\src\content\blog rmdir /S /Q site-beyondxin.top\src\content\blog
