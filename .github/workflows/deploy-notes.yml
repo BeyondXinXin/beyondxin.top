@@ -19,8 +19,7 @@ jobs:
           submodules: recursive
       - name: Update submodules to latest remote commit
         run: |
-          git submodule foreach git fetch origin
-          git submodule foreach git reset --hard origin/HEAD
+          git submodule update --init --remote --recursive
       - name: Prepare notes content
         run: |
           mkdir -p site-notes.beyondxin.top/docs
