@@ -50,7 +50,6 @@ const minutesRead =
         frontmatter.pubDate && (
           <p class="mt--6! op-50">
             <time datetime={pubDate}>{formatDate(pubDate)}</time>
-            {minutesRead !== 0 && <span>· {minutesRead} min</span>}
             {lastModDate && (
               <time datetime={lastModDate}>
                 | Updated: {formatDate(lastModDate)}

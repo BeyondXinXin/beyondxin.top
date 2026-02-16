@@ -4,8 +4,8 @@ import { ensureTrailingSlash } from '~/utils/common'
 
 const pathSegments = ensureTrailingSlash(Astro.url.pathname)
   .split('/')
-  .slice(0, -2)
-const href = pathSegments.length > 1 ? pathSegments.join('/') + '/' : '/'
+  .filter(segment => segment !== '')
+const href = pathSegments.includes('blog') ? '/blog/' : '/'
 ---
 
 <span class="font-mono op-50">&gt; </span>
