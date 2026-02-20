@@ -31,14 +31,10 @@ jobs:
           npm install -g pnpm
           pnpm install
           pnpm build
-      - name: Upload beyondxin.top
-        uses: appleboy/scp-action@master
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "site-beyondxin.top/dist/*"
-          target: "/home/www/html/beyondxin.top"
-          strip_components: 2
-          overwrite: true
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: ./site-beyondxin.top/dist
