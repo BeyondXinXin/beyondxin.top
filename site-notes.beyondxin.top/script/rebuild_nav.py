@@ -1,11 +1,11 @@
 import os
 import sqlite3
-import re
 
 db_name = '.space/context.mdb'
 base_directory = './docs/'
 ignore_directory = ["模板", "Blog", "读书笔记"]
-toml_path = './zensical.toml'
+mkdocs_template_path = './mkdocs.template.yml'
+mkdocs_path = './mkdocs.yml'
 
 
 def get_context_bt_db(path):
@@ -18,6 +18,19 @@ def get_context_bt_db(path):
     file_list = [row[0] for row in cursor.fetchall()]
     conn.close()
     return file_list
+
+
+def get_page_title(file_key):
+    file_path = base_directory + file_key
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('# '):
+                    return line[2:].strip()
+    except Exception:
+        pass
+    return os.path.splitext(os.path.basename(file_key))[0]
 
 
 def get_page_tree(relative_path=""):
@@ -41,43 +54,40 @@ def get_page_tree(relative_path=""):
 
 
 def format_nav_tree(tree, indent=1):
-    """将导航树格式化为 TOML 字符串"""
     lines = []
-    indent_str = "    " * indent
+    indent_str = "  " * indent
 
     for item in tree:
         if isinstance(item, str):
-            lines.append(f'{indent_str}"{item}",')
+            title = get_page_title(item)
+            lines.append(f'{indent_str}- {title}: {item}')
         elif isinstance(item, dict):
             for key, value in item.items():
-                lines.append(f'{indent_str}{{ "{key}" = [')
+                lines.append(f'{indent_str}- {key}:')
                 lines.extend(format_nav_tree(value, indent + 1))
-                lines.append(f'{indent_str}] }},')
 
     return lines
 
 
-# 生成导航树
 nav_tree = get_page_tree()
+print(f"{nav_tree}")
 
-
-# 格式化为 TOML 字符串
-nav_lines = ["nav = ["]
+nav_lines = ["nav:"]
 nav_lines.extend(format_nav_tree(nav_tree))
-nav_lines.append("]")
-new_nav_content = "\n".join(nav_lines)
+new_nav_block = "\n".join(nav_lines)
 
-# 读取原文件
-with open(toml_path, 'r', encoding='utf-8') as f:
+with open(mkdocs_template_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-# 使用正则表达式替换 nav 部分
-# 匹配从 nav = [ 到对应的 ] 结束
-pattern = r'nav = \[.*?\n\]'
-new_content = re.sub(pattern, new_nav_content, content, flags=re.DOTALL)
+marker = '# 导航版块'
+idx = content.find(marker)
+if idx == -1:
+    print("未找到 '# 导航版块' 标记，请检查模板文件")
+    exit(1)
 
-# 写回文件
-with open(toml_path, 'w', encoding='utf-8') as f:
+new_content = content[:idx + len(marker)] + '\n' + new_nav_block + '\n'
+
+with open(mkdocs_path, 'w', encoding='utf-8') as f:
     f.write(new_content)
 
-print(f"导航已更新到 {toml_path}")
+print(f"导航已更新到 {mkdocs_path}")
