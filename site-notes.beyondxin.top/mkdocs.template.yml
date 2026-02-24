@@ -1,0 +1,161 @@
+site_name: Beyond欣 's Notes
+site_author: Beyond欣
+site_url: https://notes.beyondxin.top
+site_description: ""
+copyright: <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备2023033867号</a>
+
+# 控制生成的文档目录结构，false 表示不生成文件夹目录，直接指向文件
+use_directory_urls: false
+
+# 设置排除文件和文件夹
+exclude_docs: |
+  /drafts/
+
+# 主题板块
+theme:
+  name: materialx
+  custom_dir: docs/overrides # 配置覆写文件目录
+  icon:
+    logo: octicons/home-24
+    repo: material/github
+  language: zh
+  font: false
+
+  palette:
+    - media: "(prefers-color-scheme: light)" # 手动模式 - 亮色
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: 亮色模式
+    - media: "(prefers-color-scheme: dark)" # 手动模式 - 暗色
+      scheme: slate
+      primary: cyan
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: 暗色模式
+
+  features:
+    # - header.autohide   # 自动隐藏header
+
+    - navigation.tabs # 导航栏显示在顶部tab里
+    - navigation.top # 返回顶部按钮
+    # - navigation.indexes      # 启用章节索引页，文档可直接附加到章节
+    # - navigation.tabs.sticky  # 顶部导航栏始终可见
+    # - navigation.expand       # 默认展开侧边导航栏
+    # - navigation.sections     # 侧边导航栏分组显示，不缩进无折叠
+    # - navigation.prune        # 只渲染可见的导航项，从而减少构建站点的大小（需关闭 navigation.expand，开启后会影响用户体验，比如折叠的分组展开时就没法显示文章列表了）
+    # - navigation.instant      # 启用即时加载，无需完全重新加载页面，对于大型文档站点有用（所有内部链接的事件都将被拦截并通过 XHR 发送）
+    # - navigation.instant.prefetch # 启用即时预取，用户将鼠标悬停在链接上，就会开始提取页面，这减少了用户的感知加载时间
+    # - navigation.tracking     # 锚点跟踪，地址栏中的 URL 会自动更新为活动锚点
+    # - navigation.footer       # 底部导航栏
+
+    - content.code.copy # 复制代码按钮
+    - content.tooltips # 启用漂亮的提示工具，取代浏览器默认样式
+    - content.footnote.tooltips # 悬停显示脚注，可以在不离开文档上下文的情况下阅读脚注
+    - search.highlight # 搜索结果高亮
+    - toc.follow # 滚动的时候侧边栏自动跟随
+    # - toc.integrate     # 目录导航集成，TOC总是作为左侧导航侧边栏的一部分呈现
+
+# markdown 属性扩展
+markdown_extensions:
+  # 给 mkdocs 的解析器 python-markdown 添加换行扩展
+  # https://python-markdown.github.io/extensions/nl2br/
+  - nl2br
+
+  - abbr # 缩略语提示小工具
+  - admonition # 扩展弹出警告框，通常称为 call-outs
+  - attr_list # 扩展给元素添加HTML/CSS属性的功能
+  - def_list # 扩展将定义列表添加到文档
+  - footnotes # 脚注
+  - md_in_html # 解析 html 中的 markdown
+  - tables # 增强表格
+
+  - pymdownx.betterem # 文本样式加强
+  - pymdownx.caret # 上标、插入符号
+  - pymdownx.mark # 标记、==高亮==
+  - pymdownx.tilde # 下标、波浪符
+  - pymdownx.critic # 批注标记，突出显示文档中添加、删除或更新的部分
+  - pymdownx.details # 可折叠的块 Note，支持：标注、批注、警告、引用等
+  - pymdownx.smartsymbols # 智能符号，如 (tm) → ™
+  - pymdownx.snippets # 将任意文件内容嵌入到文档
+  - pymdownx.blocks.caption # 向 Markdown 块添加标题，包括图像、表格和代码块
+  - pymdownx.inlinehilite # 内联代码高亮，建立在 highlight 基础上
+  - pymdownx.keys # 扩展键盘渲染-按键组合写法
+
+  - pymdownx.tasklist: # 任务列表
+      custom_checkbox: true # 切换复选框渲染样式，用漂亮的图标替换原生的
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight: # 扩展代码高亮
+      use_pygments: true # 使用 pygments 来执行代码高亮
+      pygments_lang_class: true
+      # auto_title: true      # 显示编程语言名称
+      linenums: true # 显示行号
+      linenums_style: pymdownx-inline # 行号样式，防止复制的时候复制行号
+      anchor_linenums: true
+      line_spans: __span # 代码块的每一行都包含在 span 中，对于行突出显示功能有必要
+  - pymdownx.tabbed: # 内容选项卡
+      alternate_style: true # 启用内容选项卡替代样式
+      combine_header_slug: true # 将标题的 id 添加到选项卡的 id 之前
+  - pymdownx.arithmatex: # 数学公式开关，还需配置解析插件源（mathjax/katex 二选一）
+      generic: true
+  - pymdownx.superfences: # 超级栅栏，允许代码和内容块任意嵌套（各种图、注解、选项卡、代码块等）
+      custom_fences:
+        - name: mermaid # 配置 mermaid 绘图
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      toc_depth: 4 # 目录深度
+      permalink: true # 在每个标题的末尾添加段落符 ¶
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {} # 锚点链接：统一字符编码，区分大小写
+      # slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+
+# 额外配置板块
+extra:
+  generator: false # 隐藏页脚 “Made with Material for MkDocs”
+  social: # 右下角的社交按钮
+    - icon: fontawesome/brands/edge
+      link: https://www.beyondxin.top/
+    - icon: fontawesome/brands/bilibili
+      link: https://space.bilibili.com/285016963
+
+  # 多语言选择（可随意增删）
+  alternate:
+    - name: 🇨🇳 中文
+      lang: zh
+    - name: 🇺🇸 English
+      lang: en
+
+# 插件板块
+plugins:
+  # - blog        # 内置博客插件
+  # - tags        # 内置标签插件，对页面进行分类
+  - search # 内置搜索插件
+  - offline # 内置离线插件，可离线访问网站，插件会自动禁用 use_directory_urls 设置
+  # 图片灯箱特效插件
+  - glightbox
+
+extra_javascript:
+  # 配置 full 版本的 timeago
+  - assets/document_dates/core/timeago.full.min.js
+
+  # 加载翻译插件 translate
+  - javascripts/translate.min.js
+  - javascripts/extra.js
+
+  # 配置数学公式解析库 katex 路径
+  - site-plugin/katex/katex.js
+  - site-plugin/katex/katex.min.js
+  - site-plugin/katex/auto-render.min.js
+  # 支持化学方程式
+  - site-plugin/katex/mhchem.min.js
+
+extra_css:
+  # 配置 katex 样式
+  - site-plugin/katex/katex.min.css
+
+# 导航版块
