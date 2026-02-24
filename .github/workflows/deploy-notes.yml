@@ -41,7 +41,7 @@ jobs:
           cd site-notes.beyondxin.top
           python -m pip install -r requirements.txt
           python script/rebuild_nav.py
-          python -m zensical build --clean
+          python -m mkdocs build --clean
       - name: Upload notes.beyondxin.top
         uses: appleboy/scp-action@master
         with:
