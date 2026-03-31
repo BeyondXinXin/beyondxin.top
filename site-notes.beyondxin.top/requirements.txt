@@ -1,2 +1,2 @@
-mkdocs-materialx
+mkdocs-materialx>=10.1.1
 mkdocs-glightbox
