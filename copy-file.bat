@@ -13,7 +13,7 @@ mklink /D site-books.beyondxin.top\src\content\posts ..\..\..\MyNote\读书笔�
 if not exist site-notes.beyondxin.top mkdir site-notes.beyondxin.top
 if not exist site-notes.beyondxin.top\docs mkdir site-notes.beyondxin.top\docs
 
-set dirs=.space Qt VTK C++ 开源库 编程 运维 系统 我的项目
+set dirs=.space Qt VTK C++ 编程 系统 我的项目
 setlocal enabledelayedexpansion
 for %%d in (%dirs%) do (
     if exist site-notes.beyondxin.top\docs\%%d rmdir /S /Q site-notes.beyondxin.top\docs\%%d
