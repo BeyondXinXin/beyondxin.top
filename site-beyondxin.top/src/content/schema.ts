@@ -120,6 +120,13 @@ export const postSchema = z.object({
     .url('Invalid url.')
     .optional()
     .describe('Defines a URL to redirect the post.'),
+  link: z
+    .string()
+    .url('Invalid url.')
+    .optional()
+    .describe(
+      'Specifies an external URL for the post. If provided, clicking the post will open this URL in a new tab instead of navigating to the post page.'
+    ),
   draft: z
     .boolean()
     .default(false)

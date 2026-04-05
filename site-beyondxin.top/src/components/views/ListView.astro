@@ -136,7 +136,7 @@ if (collectionType === 'feeds') {
               <ListItem
                 {idx}
                 {collectionType}
-                redirect={data.redirect}
+                redirect={data.link || data.redirect}
                 postSlug={slug}
                 title={data.title}
                 video={data.video}
