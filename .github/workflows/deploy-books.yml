@@ -19,8 +19,7 @@ jobs:
           submodules: recursive
       - name: Update submodules to latest remote commit
         run: |
-          git submodule foreach git fetch origin
-          git submodule foreach git reset --hard origin/HEAD
+          git submodule update --init --remote --recursive
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
