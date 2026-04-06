@@ -5,6 +5,9 @@ import { UI } from "~/config";
 
 import type { Tabs } from "~/types";
 
+type Tab = Tabs[number];
+type InternalTab = Extract<Tab, { path: `/${string}` }>;
+
 interface Props {
   subtitle?: string;
 }
@@ -25,7 +28,7 @@ const currentPath = ensureTrailingSlash(Astro.url.pathname);
 
 const isInternalTab = (
   tab: (typeof tabs)[number],
-): tab is { title: string; path: string } => {
+): tab is InternalTab => {
   return "path" in tab;
 };
 

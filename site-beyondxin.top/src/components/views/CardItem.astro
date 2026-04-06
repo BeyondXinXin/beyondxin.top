@@ -164,12 +164,10 @@ if (images && images.length > 0) {
           href={external.uri}
         >
           {!COMPACT && external.img && (
-            <Image
+            <img
               class="b-b b-b-[#8884] aspect-[1.91/1] object-cover"
               src={external.img}
               alt={external.title}
-              inferSize
-              {...imageProps}
             />
           )}
           <div class="flex flex-col px-3 pt-2 pb-1">
@@ -193,11 +191,10 @@ if (images && images.length > 0) {
             text-sm shadow-transition-500 hover:(shadow-custom_0_5_15_-3)`}
         >
           <div class="flex items-center gap-1">
-            <Image
+            <img
               class="size-1em rounded-full object-cover"
               src={quote.author.avatar}
               alt={quote.author.name}
-              inferSize
             />
             <p class="truncate">
               <span class="font-600">{quote.author.name}</span>

@@ -10,16 +10,16 @@ import rehypeKatex from 'rehype-katex'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
-import { UI, FEATURES } from '../src/config'
+const UI = {
+  externalLink: {
+    newTab: true,
+    cursorType: '',
+    showNewTabIcon: false,
+  },
+}
 
-import type { RemarkPlugins, RehypePlugins } from 'astro'
-import type { PropertiesFromTextDirective } from 'remark-directive-sugar'
-import type { CreateProperties } from 'rehype-external-links'
-
-export const remarkPlugins: RemarkPlugins = [
-  // https://github.com/remarkjs/remark-directive
+export const remarkPlugins = [
   remarkDirective,
-  // https://github.com/lin-stephanie/remark-directive-sugar
   [
     remarkDirectiveSugar,
     {
@@ -33,8 +33,8 @@ export const remarkPlugins: RemarkPlugins = [
       link: {
         faviconSourceUrl:
           'https://www.google.com/s2/favicons?domain={domain}&sz=128',
-        imgProps: (node: Parameters<PropertiesFromTextDirective>[0]) => {
-          const props: ReturnType<PropertiesFromTextDirective> = {
+        imgProps: (node) => {
+          const props = {
             'aria-hidden': 'true',
           }
           if (node.attributes?.class?.includes('github'))
@@ -49,30 +49,24 @@ export const remarkPlugins: RemarkPlugins = [
       },
     },
   ],
-  // https://github.com/OliverSpeir/remark-imgattr
   remarkImgattr,
-  // https://github.com/remarkjs/remark-math/tree/main/packages/remark-math
   remarkMath,
 ]
 
-export const rehypePlugins: RehypePlugins = [
-  // https://docs.astro.build/en/guides/markdown-content/#heading-ids-and-plugins
+export const rehypePlugins = [
   rehypeHeadingIds,
-  // https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex
   rehypeKatex,
-  // https://github.com/lin-stephanie/rehype-callouts
   [
     rehypeCallouts,
     {
       theme: 'vitepress',
     },
   ],
-  // https://github.com/rehypejs/rehype-external-links
   [
     rehypeExternalLinks,
     {
       rel: UI.externalLink.newTab ? 'noopener noreferrer' : [],
-      content: (el: Parameters<CreateProperties>[0]) => {
+      content: (el) => {
         if (!UI.externalLink.newTab || !UI.externalLink.showNewTabIcon)
           return null
 
@@ -90,7 +84,7 @@ export const rehypePlugins: RehypePlugins = [
           value: '',
         }
       },
-      contentProperties: (el: Parameters<CreateProperties>[0]) => {
+      contentProperties: (el) => {
         if (!UI.externalLink.newTab || !UI.externalLink.showNewTabIcon)
           return null
 
@@ -105,12 +99,12 @@ export const rehypePlugins: RehypePlugins = [
 
         return {
           'u-i-carbon-arrow-up-right': true,
-          'className': ['new-tab-icon'],
+          className: ['new-tab-icon'],
           'aria-hidden': 'true',
         }
       },
-      properties: (el: Parameters<CreateProperties>[0]) => {
-        const props: ReturnType<CreateProperties> = {}
+      properties: (el) => {
+        const props = {}
         const href = el.properties.href
 
         if (!href || typeof href !== 'string') return props
@@ -132,18 +126,17 @@ export const rehypePlugins: RehypePlugins = [
       },
     },
   ],
-  // https://github.com/rehypejs/rehype-autolink-headings
   [
     rehypeAutolinkHeadings,
     {
       behavior: 'append',
-      properties: (el: Parameters<CreateProperties>[0]) => {
+      properties: (el) => {
         let content = ''
         visit(el, 'text', (textNode) => {
           content += textNode.value
         })
         return {
-          'class': 'header-anchor',
+          class: 'header-anchor',
           'tab-index': 0,
           'aria-hidden': 'false',
           'aria-label': content ? `Link to ${content}` : undefined,

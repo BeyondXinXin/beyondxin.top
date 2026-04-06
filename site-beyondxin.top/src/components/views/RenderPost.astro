@@ -4,17 +4,33 @@ import { getEntry } from 'astro:content'
 import Toc from '~/components/toc/Toc.astro'
 import { FEATURES } from '~/config'
 
-import type { ContentCollectionKey, ValidContentEntrySlug } from 'astro:content'
+import type { PostCollectionKey, RenderedHeading } from '~/utils/post'
+
+type RenderableCollection = PostCollectionKey | 'home'
+
+interface RenderableEntry {
+  render(): Promise<{
+    Content: any
+    headings: RenderedHeading[]
+  }>
+}
 
 interface Props {
-  collectionType: ContentCollectionKey
-  slug: ValidContentEntrySlug<ContentCollectionKey>
+  collectionType: RenderableCollection
+  slug: string
   pageToc: boolean
 }
 
-const { collectionType, slug, pageToc } = Astro.props
+const { collectionType, slug, pageToc } = Astro.props as Props
 
-const post = await getEntry(collectionType, slug)
+const post = (
+  collectionType === 'home'
+    ? await getEntry('home', slug)
+    : collectionType === 'blog'
+      ? await getEntry('blog', slug)
+      : await getEntry('changelog', slug)
+) as RenderableEntry | undefined
+if (!post) throw new Error(`Entry '${collectionType}/${slug}' was not found.`)
 const { Content, headings } = await post.render()
 const { toc } = FEATURES
 ---

@@ -1,14 +1,16 @@
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
-import unocss from 'unocss/astro'
+import unocss from '@unocss/astro'
 import astroExpressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
+import { remarkPlugins, rehypePlugins } from './plugins/index.mjs'
 
-import { remarkPlugins, rehypePlugins } from './plugins'
-import { SITE } from './src/config'
+const SITE = {
+  website: 'https://www.beyondxin.top/',
+  base: '/',
+}
 
-// https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
   site: SITE.website,
   base: SITE.base,
@@ -25,9 +27,7 @@ export default defineConfig({
     rehypePlugins,
   },
   experimental: {
-    contentLayer: true,
     contentIntellisense: true,
-    directRenderScript: true,
   },
   vite: {
     build: { chunkSizeWarningLimit: 1200 },

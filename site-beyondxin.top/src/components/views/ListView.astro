@@ -4,29 +4,26 @@ import { getCollection, getEntry } from 'astro:content'
 import Categorizer from '~/components/base/Categorizer.astro'
 import ListItem from '~/components/views/ListItem.astro'
 import Toc from '~/components/toc/Toc.astro'
-import Warning from '~/components/base/Warning.astro'
 
 import { FEATURES } from '~/config'
 import { isSameYear, getYear } from '~/utils/datetime'
 import { getFilteredPosts, getSortedPosts } from '~/utils/post'
 
-import type {
-  CollectionEntry,
-  ContentCollectionKey,
-  DataCollectionKey,
-} from 'astro:content'
-import type { StreamGroupsSchema } from '~/content/schema'
+import type { FeedSchema, StreamGroupsSchema } from '~/content/schema'
+import type { PostEntry, PostCollectionKey } from '~/utils/post'
+
+type ListCollectionType = PostCollectionKey | 'streams' | 'feeds'
+type FeedEntry = {
+  id: string
+  data: FeedSchema
+}
 
 interface Props {
-  collectionType: ContentCollectionKey | DataCollectionKey
+  collectionType: ListCollectionType
   pageToc: boolean
 }
 
-const { collectionType, pageToc } = Astro.props
-
-const VALID_COLLECTION_TYPE = ['blog', 'changelog', 'streams', 'feeds']
-const WARNING = `The '${collectionType}' collection type is not built-in.
-  Modify <code>ListView.astro</code> to render it.`
+const { collectionType, pageToc } = Astro.props as Props
 
 /* Toc */
 const { toc } = FEATURES
@@ -34,8 +31,8 @@ const tocEnabled = Array.isArray(toc) && toc[0] && pageToc
 let years: string[] = []
 
 /* Posts */
-let blogItems: CollectionEntry<ContentCollectionKey>[]
-let sortedBlogItems: CollectionEntry<ContentCollectionKey>[] = []
+let blogItems: PostEntry[] = []
+let sortedBlogItems: PostEntry[] = []
 
 if (collectionType === 'blog' || collectionType === 'changelog') {
   blogItems = await getFilteredPosts(collectionType)
@@ -55,11 +52,14 @@ if (collectionType === 'blog' || collectionType === 'changelog') {
 }
 
 /* Streams */
-let streamItems: StreamGroupsSchema
+let streamItems: StreamGroupsSchema = []
 let sortedStreamItems: StreamGroupsSchema = []
 
 if (collectionType === 'streams') {
-  const streamData = await getEntry(collectionType, 'data')
+  const streamData = (await getEntry('streams', 'data')) as
+    | { data: { streams: StreamGroupsSchema } }
+    | undefined
+  if (!streamData) throw new Error("Streams entry 'data' was not found.")
   streamItems = streamData.data.streams
 
   sortedStreamItems = streamItems.sort(
@@ -80,11 +80,11 @@ if (collectionType === 'streams') {
 }
 
 /* Feeds */
-let feedItems: CollectionEntry<'feeds'>[]
-let sortedFeedItems: CollectionEntry<'feeds'>[] = []
+let feedItems: FeedEntry[] = []
+let sortedFeedItems: FeedEntry[] = []
 
 if (collectionType === 'feeds') {
-  feedItems = await getCollection(collectionType)
+  feedItems = (await getCollection('feeds')) as FeedEntry[]
 
   sortedFeedItems = feedItems.sort((a, b) => {
     if (!a.data.pubdate || !b.data.pubdate)
@@ -233,5 +233,3 @@ if (collectionType === 'feeds') {
     </div>
   )
 }
-
-{!VALID_COLLECTION_TYPE.includes(collectionType) && <Warning html={WARNING} />}

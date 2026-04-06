@@ -7,6 +7,7 @@ import Warning from '~/components/base/Warning.astro'
 import { formatDate } from '~/utils/datetime'
 import { getFilteredPosts } from '~/utils/post'
 import { FEATURES } from '~/config'
+import type { PostEntry } from '~/utils/post'
 
 export async function getStaticPaths() {
   const posts = await getFilteredPosts('blog')
@@ -23,16 +24,14 @@ const WARNING = `This is a draft post that will not be published
 in production. Set the post's <code>draft</code> property in
 frontmatter to <code>false</code> or remove it to publish the post.`
 
-const { post } = Astro.props
+const { post } = Astro.props as { post: PostEntry }
 const { data: frontmatter } = post
-const { Content, headings, remarkPluginFrontmatter } = await post.render()
+const { Content, headings } = await post.render()
 const { share, toc } = FEATURES
 
 const pubDate = frontmatter.pubDate.toISOString()
 const lastModDate =
   frontmatter.lastModDate && frontmatter.lastModDate.toISOString()
-const minutesRead =
-  frontmatter.minutesRead || remarkPluginFrontmatter.minutesRead
 ---
 
 <BaseLayout
