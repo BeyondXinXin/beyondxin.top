@@ -3,15 +3,23 @@ import { getCollection } from 'astro:content'
 
 import CardItem from '~/components/views/CardItem.astro'
 import Warning from '~/components/base/Warning.astro'
-import { processBlueskyPosts, getShortsFromBlog } from '~/utils/data'
+import { getShortsFromBlog } from '~/utils/data'
 
-import type { ContentCollectionKey, DataCollectionKey } from 'astro:content'
 import type { CardItemData } from '~/components/views/CardItem.astro'
+import type { HighlightSchema } from '~/content/schema'
+import type { PostEntry, RenderedPostResult } from '~/utils/post'
+
+type CardCollectionType = 'highlights' | 'shorts'
+
+interface HighlightEntry {
+  data: HighlightSchema
+  render(): Promise<RenderedPostResult>
+}
 
 interface Props {
-  collectionType: ContentCollectionKey | DataCollectionKey
+  collectionType: CardCollectionType
   mode: 'masonry' | 'grid'
-  gap?: 'number'
+  gap?: number
   minCardWidth?: number
   maxCardWidth?: number
 }
@@ -22,24 +30,46 @@ const {
   gap = 16,
   minCardWidth,
   maxCardWidth,
-} = Astro.props
+} = Astro.props as Props
 
 const WARNING = `No content available for display.
   Please review and modify <code>CardView.astro</code> as needed.`
 
 let isEmpty = false
-let dataForMasonry: CardItemData[] = []
+let dataForMasonry: HighlightEntry[] = []
 let dataForGrid: CardItemData[] = []
 
+function toCardItemData(data: HighlightSchema): CardItemData {
+  return {
+    date: data.date,
+    images: data.images,
+    video: data.video
+      ? {
+          src: data.video.src,
+          alt: data.video.alt,
+          poster: data.video.thumbnail,
+        }
+      : undefined,
+    external: data.external
+      ? {
+          uri: data.external.uri,
+          title: data.external.title,
+          description: data.external.description,
+          img: data.external.thumb,
+        }
+      : undefined,
+  }
+}
+
 if (collectionType === 'highlights') {
-  const highlights = await getCollection(collectionType)
+  const highlights = (await getCollection('highlights')) as HighlightEntry[]
   dataForMasonry = highlights.sort(
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
   )
 }
 
-if (collectionType === ('shorts' as ContentCollectionKey)) {
-  const posts = await getCollection('blog')
+if (collectionType === 'shorts') {
+  const posts = (await getCollection('blog')) as PostEntry[]
   dataForGrid = await getShortsFromBlog(posts)
 }
 
@@ -61,7 +91,10 @@ if (dataForMasonry.length === 0 && dataForGrid.length === 0) isEmpty = true
           {dataForMasonry.map(async (item) => {
             const { Content } = await item.render()
             return (
-              <CardItem class="card-masonry absolute top-0 left-0" item={item.data}>
+              <CardItem
+                class="card-masonry absolute top-0 left-0"
+                item={toCardItemData(item.data)}
+              >
                 <Content />
               </CardItem>
             )

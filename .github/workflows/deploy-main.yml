@@ -20,10 +20,10 @@ jobs:
       - name: Update submodules to latest remote commit
         run: |
           git submodule update --init --remote --recursive
-      - name: Set up Node.js 20
+      - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: "20.19"
+          node-version: "22.22"
       - name: Build beyondxin.top
         run: |
           cd site-beyondxin.top

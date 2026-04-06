@@ -8,8 +8,8 @@ import {
 import { atUriToPostUri } from 'astro-loader-bluesky-posts'
 
 import { ensureTrailingSlash, getUrl } from './common'
+import type { PostEntry } from './post'
 
-import type { CollectionEntry } from 'astro:content'
 import type { CardItemData } from '~/components/views/CardItem.astro'
 import type { GitHubView } from '~/types'
 
@@ -99,7 +99,7 @@ export function processVersion(
 /**
  * Processes Bluesky posts and converts them into `CardItemData` interface.
  */
-export function processBlueskyPosts(data: CollectionEntry<'highlights'>[]) {
+export function processBlueskyPosts(data: Array<{ data: any }>) {
   const cards: CardItemData[] = []
 
   for (const item of data) {
@@ -114,7 +114,7 @@ export function processBlueskyPosts(data: CollectionEntry<'highlights'>[]) {
 
     if (embed) {
       if (AppBskyEmbedImages.isView(embed))
-        card.images = embed.images.map((img) => ({
+        card.images = embed.images.map((img: any) => ({
           src: img.thumb,
           alt: img.alt,
         }))
@@ -156,7 +156,7 @@ export function processBlueskyPosts(data: CollectionEntry<'highlights'>[]) {
 
         if (media) {
           if (AppBskyEmbedImages.isView(media))
-            card.images = media.images.map((img) => ({
+            card.images = media.images.map((img: any) => ({
               src: img.thumb,
               alt: img.alt,
             }))
@@ -195,7 +195,7 @@ export function processBlueskyPosts(data: CollectionEntry<'highlights'>[]) {
     }
 
     if (replies && replies.length > 0) {
-      card.details = replies.map((reply) => reply.html)
+      card.details = replies.map((reply: any) => reply.html)
     }
 
     cards.push(card)
@@ -207,7 +207,7 @@ export function processBlueskyPosts(data: CollectionEntry<'highlights'>[]) {
 /**
  * Processes blog posts and converts them into `CardItemData` interface.
  */
-export async function getShortsFromBlog(data: CollectionEntry<'blog'>[]) {
+export async function getShortsFromBlog(data: PostEntry[]) {
   const cards: CardItemData[] = []
   const basePath = getUrl(ensureTrailingSlash('/blog'))
   const sortedData = data.sort(

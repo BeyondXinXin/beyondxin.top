@@ -137,6 +137,14 @@ export const postSchema = z.object({
 
 export type PostSchema = z.infer<typeof postSchema>
 
+export const feedSchema = z.object({
+  title: z.string(),
+  pubdate: z.coerce.date(),
+  link: z.string().url('Invalid url.'),
+})
+
+export type FeedSchema = z.infer<typeof feedSchema>
+
 /* Projects */
 const projectSchema = z.object({
   name: z
@@ -236,3 +244,5 @@ export const highlightSchema = z.object({
     })
     .optional(),
 })
+
+export type HighlightSchema = z.infer<typeof highlightSchema>
