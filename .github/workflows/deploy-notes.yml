@@ -48,6 +48,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "site-notes.beyondxin.top/site/*"
-          target: "/home/www/html/notes.beyondxin.top"
+          target: "/home/www/html/notes.beyondxin.com"
           strip_components: 2
           overwrite: true
