@@ -1,4 +1,4 @@
-## [beyondxin.top](https://beyondxin.top)
+## [beyondxin.com](https://beyondxin.com)
 
 | ![](https://img.beyondxin.top/2025/202511281632169.png) | ![](https://img.beyondxin.top/2025/202511281620537.png) |
 | ----- | ----- |
@@ -9,7 +9,7 @@ Build with [Astro](https://astro.build/),Theme「antfustyle」by [lin-stephanie]
 
 ---
 
-## [books.beyondxin.top](https://books.beyondxin.top)
+## [books.beyondxin.com](https://books.beyondxin.com)
 
 | ![](https://img.beyondxin.top/2025/202511281621746.png) | ![](https://img.beyondxin.top/2025/202511281634391.png) |
 | ----- | ----- |
@@ -19,7 +19,7 @@ Build with [Astro](https://astro.build/),Theme Typography by [Moeyua](https://gi
 
 ---
 
-## [notes.beyondxin.top](https://notes.beyondxin.top)
+## [notes.beyondxin.com](https://notes.beyondxin.com)
 
 | ![](https://img.beyondxin.top/2026/20260224224515876.png) | ![](https://img.beyondxin.top/2026/20260224224608116.png) |
 | ----- | ----- |
