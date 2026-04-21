@@ -38,6 +38,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "site-beyondxin.top/dist/*"
-          target: "/home/www/html/beyondxin.top"
+          target: "/home/www/html/beyondxin.com"
           strip_components: 2
           overwrite: true
