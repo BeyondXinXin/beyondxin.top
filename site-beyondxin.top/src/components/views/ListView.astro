@@ -7,7 +7,11 @@ import Toc from '~/components/toc/Toc.astro'
 
 import { FEATURES } from '~/config'
 import { isSameYear, getYear } from '~/utils/datetime'
-import { getFilteredPosts, getSortedPosts } from '~/utils/post'
+import {
+  getExternalBlogPosts,
+  getFilteredPosts,
+  getSortedPosts
+} from '~/utils/post'
 
 import type { FeedSchema, StreamGroupsSchema } from '~/content/schema'
 import type { PostEntry, PostCollectionKey } from '~/utils/post'
@@ -16,6 +20,16 @@ type ListCollectionType = PostCollectionKey | 'streams' | 'feeds'
 type FeedEntry = {
   id: string
   data: FeedSchema
+}
+type PostListItem = {
+  title: string
+  pubDate: Date
+  redirect?: string
+  postSlug?: string
+  video?: boolean
+  radio?: boolean
+  platform?: string
+  getMinutesRead?: () => Promise<number | undefined>
 }
 
 interface Props {
@@ -32,16 +46,50 @@ let years: string[] = []
 
 /* Posts */
 let blogItems: PostEntry[] = []
-let sortedBlogItems: PostEntry[] = []
+let sortedBlogItems: PostListItem[] = []
 
 if (collectionType === 'blog' || collectionType === 'changelog') {
   blogItems = await getFilteredPosts(collectionType)
-  sortedBlogItems = getSortedPosts(blogItems)
+  const localBlogItems: PostListItem[] = getSortedPosts(blogItems).map(
+    function (item) {
+      const { data, slug } = item
+
+      return {
+        title: data.title,
+        pubDate: data.pubDate,
+        redirect: data.link || data.redirect,
+        postSlug: slug,
+        video: data.video,
+        radio: data.radio,
+        platform: data.platform,
+        getMinutesRead: async function () {
+          const { remarkPluginFrontmatter } = await item.render()
+          return data.minutesRead || remarkPluginFrontmatter.minutesRead
+        }
+      }
+    }
+  )
+  const externalBlogItems: PostListItem[] =
+    collectionType === 'blog'
+      ? getExternalBlogPosts().map(function (item) {
+          return {
+            title: item.title,
+            pubDate: item.pubDate,
+            redirect: item.link
+          }
+        })
+      : []
+
+  sortedBlogItems = [...localBlogItems, ...externalBlogItems].sort(
+    function (a, b) {
+      return b.pubDate.valueOf() - a.pubDate.valueOf()
+    }
+  )
 
   if (tocEnabled) {
     const yearsSet = new Set<number>()
     sortedBlogItems.forEach((item) => {
-      const year = getYear(item.data.pubDate)
+      const year = getYear(item.pubDate)
       yearsSet.add(year)
     })
 
@@ -115,35 +163,31 @@ if (collectionType === 'feeds') {
       {sortedBlogItems.length === 0 ? (
         <div class="py-2 op-50">nothing here yet</div>
       ) : (
-        sortedBlogItems.map(async (item, idx) => {
-          const { data, slug } = item
-          const { remarkPluginFrontmatter } = await item.render()
-          const minutesRead =
-            data.minutesRead || remarkPluginFrontmatter.minutesRead
+        sortedBlogItems.map(async function (item, idx) {
+          const minutesRead = item.getMinutesRead
+            ? await item.getMinutesRead()
+            : undefined
 
           return (
             <>
-              {!isSameYear(
-                data.pubDate,
-                sortedBlogItems[idx - 1]?.data.pubDate
-              ) && (
+              {!isSameYear(item.pubDate, sortedBlogItems[idx - 1]?.pubDate) && (
                 <Categorizer
                   {idx}
                   needId={tocEnabled}
-                  text={getYear(data.pubDate).toString()}
+                  text={getYear(item.pubDate).toString()}
                 />
               )}
               <ListItem
                 {idx}
                 {collectionType}
-                redirect={data.link || data.redirect}
-                postSlug={slug}
-                title={data.title}
-                video={data.video}
-                radio={data.radio}
-                date={data.pubDate}
+                redirect={item.redirect}
+                postSlug={item.postSlug}
+                title={item.title}
+                video={item.video}
+                radio={item.radio}
+                date={item.pubDate}
                 {minutesRead}
-                platform={data.platform}
+                platform={item.platform}
               />
             </>
           )
