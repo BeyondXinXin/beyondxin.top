@@ -3,6 +3,7 @@
   "version": "1.6.0",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@10.33.0",
   "license": "MIT",
   "scripts": {
     "astro": "astro",
@@ -15,7 +16,6 @@
     "format:write": "prettier . --write --ignore-unknown --cache",
     "toolbar:on": "astro preferences enable devToolbar",
     "toolbar:off": "astro preferences disable devToolbar",
-    "prepare": "simple-git-hooks",
     "postbuild": "pagefind --site dist && del-cli \"dist/pagefind/*ui*\""
   },
   "devDependencies": {
@@ -61,7 +61,6 @@
     "satori": "^0.12.2",
     "satori-html": "^0.3.2",
     "sharp": "^0.33.5",
-    "simple-git-hooks": "^2.12.1",
     "swiper": "^11.2.6",
     "typescript": "^5.8.2",
     "unist-util-visit": "^5.0.0",
@@ -69,7 +68,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "simple-git-hooks"
+      "esbuild",
+      "sharp"
     ]
   },
   "engines": {
