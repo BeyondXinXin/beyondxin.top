@@ -7,7 +7,6 @@ const categoryLabels: Record<ProjectCategory, string> = {
   dev: '开发工具',
   desktop: '桌面应用',
   medical: '医疗影像',
-  network: '网络工具',
   ai: 'AI',
   game: '游戏',
   cpp: 'C++',
@@ -18,11 +17,16 @@ const categoryLabels: Record<ProjectCategory, string> = {
 
 const filters = [
   ['all', '全部'],
-  ...Array.from(new Set(projects.flatMap((project) => project.categories))).map((category) => [
-    category,
-    categoryLabels[category],
-  ] as const),
-]
+  ['dev', categoryLabels.dev],
+  ['desktop', categoryLabels.desktop],
+  ['medical', categoryLabels.medical],
+  ['ai', categoryLabels.ai],
+  ['game', categoryLabels.game],
+  ['cpp', categoryLabels.cpp],
+  ['go', categoryLabels.go],
+  ['typescript', categoryLabels.typescript],
+  ['gdscript', categoryLabels.gdscript],
+] as const
 ---
 
 <BaseLayout title="作品集" description="一些我做过的项目，记录在这里。" bodyClass="portfolio-page">

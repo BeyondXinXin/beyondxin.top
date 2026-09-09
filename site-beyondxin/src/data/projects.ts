@@ -2,7 +2,6 @@ export type ProjectCategory =
   | 'dev'
   | 'desktop'
   | 'medical'
-  | 'network'
   | 'ai'
   | 'game'
   | 'cpp'
@@ -45,7 +44,7 @@ export const projects: Project[] = [
   {
     name: 'NixVis',
     description: '轻量的 Nginx 日志分析与可视化工具。',
-    categories: ['network', 'dev', 'go'],
+    categories: ['dev', 'go'],
     icon: 'box',
     primaryUrl: 'https://notes.beyondxin.com/我的项目/NixVis.html',
     githubUrl: 'https://github.com/BeyondXinXin/nixvis',
@@ -61,7 +60,7 @@ export const projects: Project[] = [
   {
     name: 'PortPilot',
     description: '让本地 Web 服务被手机、另一台电脑或互联网访问。',
-    categories: ['network', 'dev', 'go'],
+    categories: ['dev', 'go'],
     icon: 'monitor',
     primaryUrl: 'https://github.com/BeyondXinXin/PortPilot',
     githubUrl: 'https://github.com/BeyondXinXin/PortPilot',
@@ -85,7 +84,7 @@ export const projects: Project[] = [
   {
     name: 'EgressProbe',
     description: '网络出口与代理环境检测工具。',
-    categories: ['network', 'dev', 'go'],
+    categories: ['dev', 'go'],
     icon: 'share',
     primaryUrl: 'https://github.com/BeyondXinXin/EgressProbe',
     githubUrl: 'https://github.com/BeyondXinXin/EgressProbe',
@@ -93,7 +92,7 @@ export const projects: Project[] = [
   {
     name: 'DeepSeekHarnessBox',
     description: '一键部署与运行 DeepSeek Harness 环境的 Windows 工具。',
-    categories: ['ai', 'dev', 'go'],
+    categories: ['dev', 'desktop', 'ai', 'go'],
     icon: 'box',
     primaryUrl: 'https://github.com/BeyondXinXin/deepseek-harness-box',
     githubUrl: 'https://github.com/BeyondXinXin/deepseek-harness-box',
