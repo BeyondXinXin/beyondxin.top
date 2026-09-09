@@ -1,76 +1,38 @@
 ---
+import { getCollection, render, type CollectionEntry } from 'astro:content'
 import BaseLayout from '~/layouts/BaseLayout.astro'
-import StandardLayout from '~/layouts/StandardLayout.astro'
-import Toc from '~/components/toc/Toc.astro'
-import ShareLink from '~/components/widgets/ShareLink.astro'
-import Warning from '~/components/base/Warning.astro'
-import { formatDate } from '~/utils/datetime'
-import { getFilteredPosts } from '~/utils/post'
-import { FEATURES } from '~/config'
-import type { PostEntry } from '~/utils/post'
+import { toBlogSlug } from '~/utils/blog'
 
 export async function getStaticPaths() {
-  const posts = await getFilteredPosts('blog')
+  const posts = await getCollection('blog')
 
-  return posts
-    .filter((post) => !post.data.link)
-    .map((post) => ({
-      params: { slug: post.slug },
-      props: { post },
-    }))
+  return posts.map((post) => ({
+    params: { slug: toBlogSlug(post.id) },
+    props: { post },
+  }))
 }
 
-const WARNING = `This is a draft post that will not be published
-in production. Set the post's <code>draft</code> property in
-frontmatter to <code>false</code> or remove it to publish the post.`
+interface Props {
+  post: CollectionEntry<'blog'>
+}
 
-const { post } = Astro.props as { post: PostEntry }
-const { data: frontmatter } = post
-const { Content, headings } = await post.render()
-const { share, toc } = FEATURES
-
-const pubDate = frontmatter.pubDate.toISOString()
-const lastModDate =
-  frontmatter.lastModDate && frontmatter.lastModDate.toISOString()
+const { post } = Astro.props
+const { Content } = await render(post)
+const publishedAt = post.data.pubDate.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
 ---
 
-<BaseLayout
-  title={frontmatter.title}
-  description={frontmatter.description}
-  ogImage={frontmatter.ogImage}
-  {pubDate}
-  {lastModDate}
->
-  <StandardLayout
-    title={frontmatter.title}
-    subtitle={frontmatter.subtitle}
-    isSearchable={true}
-  >
-    <Fragment slot="head">
-      {
-        frontmatter.pubDate && (
-          <p class="mt--6! op-50">
-            <time datetime={pubDate}>{formatDate(pubDate)}</time>
-            {lastModDate && (
-              <time datetime={lastModDate}>
-                | Updated: {formatDate(lastModDate)}
-              </time>
-            )}
-          </p>
-        )
-      }
-    </Fragment>
-    <Fragment slot="article">
-      {frontmatter.draft && <Warning html={WARNING} />}
-      {Array.isArray(toc) && toc[0] && frontmatter.toc && <Toc {headings} />}
+<BaseLayout title={post.data.title} description={`${post.data.title}｜Beyond欣的博客`}>
+  <article class="blog-article">
+    <header>
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.pubDate.toISOString()}>{publishedAt}</time>
+    </header>
+    <div class="blog-prose">
       <Content />
-    </Fragment>
-  </StandardLayout>
-  <Fragment slot="share">
-    {
-      Array.isArray(share) && share[0] && frontmatter.share && (
-        <ShareLink config={share[1]} />
-      )
-    }
-  </Fragment>
+    </div>
+  </article>
 </BaseLayout>

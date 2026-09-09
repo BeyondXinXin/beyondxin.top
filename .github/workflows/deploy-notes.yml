@@ -22,32 +22,32 @@ jobs:
           git submodule update --init --remote --recursive
       - name: Prepare notes content
         run: |
-          mkdir -p site-notes.beyondxin.top/docs
-          cp -r MyNote/.space site-notes.beyondxin.top/docs/
-          cp -r MyNote/Qt site-notes.beyondxin.top/docs/
-          cp -r MyNote/VTK site-notes.beyondxin.top/docs/
-          cp -r MyNote/C++ site-notes.beyondxin.top/docs/
-          cp -r MyNote/编程 site-notes.beyondxin.top/docs/
-          cp -r MyNote/系统 site-notes.beyondxin.top/docs/
-          cp -r MyNote/我的项目 site-notes.beyondxin.top/docs/
+          mkdir -p site-notes.beyondxin/docs
+          cp -r MyNote/.space site-notes.beyondxin/docs/
+          cp -r MyNote/Qt site-notes.beyondxin/docs/
+          cp -r MyNote/VTK site-notes.beyondxin/docs/
+          cp -r MyNote/C++ site-notes.beyondxin/docs/
+          cp -r MyNote/编程 site-notes.beyondxin/docs/
+          cp -r MyNote/系统 site-notes.beyondxin/docs/
+          cp -r MyNote/我的项目 site-notes.beyondxin/docs/
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Build notes.beyondxin.top
+      - name: Build notes.beyondxin
         run: |
-          cd site-notes.beyondxin.top
+          cd site-notes.beyondxin
           python -m pip install -r requirements.txt
           python script/rebuild_nav.py
           python -m mkdocs build --clean
-      - name: Upload notes.beyondxin.top
+      - name: Upload notes.beyondxin
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "site-notes.beyondxin.top/site/*"
+          source: "site-notes.beyondxin/site/*"
           target: "/home/www/html/notes.beyondxin.com"
           strip_components: 2
           overwrite: true

@@ -1,78 +1,29 @@
 {
-  "name": "astro-antfustyle-theme",
-  "version": "1.6.0",
+  "name": "site-beyondxin",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@10.33.0",
-  "license": "MIT",
   "scripts": {
     "astro": "astro",
-    "sync": "node scripts/with-local-blog-link.mjs astro sync",
-    "dev": "node scripts/with-local-blog-link.mjs astro dev",
-    "check": "node scripts/with-local-blog-link.mjs astro check",
-    "build": "node scripts/with-local-blog-link.mjs astro build",
-    "preview": "astro preview",
-    "format": "prettier . --check --ignore-unknown",
-    "format:write": "prettier . --write --ignore-unknown --cache",
-    "toolbar:on": "astro preferences enable devToolbar",
-    "toolbar:off": "astro preferences disable devToolbar",
-    "postbuild": "pagefind --site dist && del-cli \"dist/pagefind/*ui*\""
+    "dev": "astro dev",
+    "check": "astro check",
+    "prebuild": "node ./scripts/sync-blog.mjs",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "devDependencies": {
-    "@ascorbic/feed-loader": "^1.0.4",
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/markdown-remark": "^5.3.0",
-    "@astrojs/mdx": "^4.3.14",
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.7.2",
-    "@atproto/api": "^0.14.16",
-    "@expressive-code/plugin-collapsible-sections": "^0.40.2",
-    "@expressive-code/plugin-line-numbers": "^0.40.2",
-    "@iconify/json": "^2.2.322",
-    "@types/node": "^22.13.14",
-    "@types/nprogress": "^0.2.3",
-    "@types/p5": "^1.7.6",
-    "@unocss/astro": "^66.6.7",
-    "@unocss/reset": "^66.6.7",
-    "astro": "^5.18.1",
-    "astro-expressive-code": "^0.41.7",
-    "astro-loader-bluesky-posts": "^1.2.0",
-    "astro-robots-txt": "^1.0.0",
-    "chalk": "^5.4.1",
-    "del-cli": "^6.0.0",
-    "globals": "^16.0.0",
-    "html-entities": "^2.6.0",
-    "mdast-util-to-string": "^4.0.0",
-    "medium-zoom": "^1.1.0",
-    "nprogress": "^0.2.0",
-    "p5": "^1.11.3",
-    "pagefind": "^1.3.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.0",
-    "reading-time": "^1.5.0",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-callouts": "^2.0.2",
-    "rehype-external-links": "^3.0.0",
-    "rehype-katex": "^7.0.1",
-    "remark-directive": "^4.0.0",
-    "remark-directive-sugar": "^1.1.2",
-    "remark-imgattr": "^1.0.5",
-    "remark-math": "^6.0.0",
-    "satori": "^0.12.2",
-    "satori-html": "^0.3.2",
-    "sharp": "^0.33.5",
-    "swiper": "^11.2.6",
-    "typescript": "^5.8.2",
-    "unist-util-visit": "^5.0.0",
-    "unocss": "^66.6.7"
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
+      "esbuild"
     ]
-  },
-  "engines": {
-    "node": "^22.0.0"
   }
 }

@@ -3,10 +3,8 @@
 | ![](https://img.beyondxin.top/2025/202511281632169.png) | ![](https://img.beyondxin.top/2025/202511281620537.png) |
 | ----- | ----- |
 
-基于 [Astro](https://astro.build/) 构建，主题「antfustyle」由 [lin-stephanie](https://github.com/lin-stephanie/astro-antfustyle-theme) 提供  
+基于 [Astro](https://astro.build/) 构建
   
-Build with [Astro](https://astro.build/),Theme「antfustyle」by [lin-stephanie](https://github.com/lin-stephanie/astro-antfustyle-theme)  
-
 ---
 
 ## [books.beyondxin.com](https://books.beyondxin.com)
@@ -15,7 +13,6 @@ Build with [Astro](https://astro.build/),Theme「antfustyle」by [lin-stephanie]
 | ----- | ----- |
 
 基于 [Astro](https://astro.build/) 构建，主题「活版印字」由 [Moeyua](https://github.com/moeyua/astro-theme-typography) 提供  
-Build with [Astro](https://astro.build/),Theme Typography by [Moeyua](https://github.com/moeyua/astro-theme-typography)  
 
 ---
 
@@ -25,4 +22,3 @@ Build with [Astro](https://astro.build/),Theme Typography by [Moeyua](https://gi
 | ----- | ----- |
 
 基于 [Mkdocs](https://www.mkdocs.org/) 构建，主题「MaterialX」由 [jaywhj](https://github.com/jaywhj) 提供  
-Build with [Mkdocs](https://www.mkdocs.org/),Theme MaterialX by [jaywhj](https://github.com/jaywhj)  

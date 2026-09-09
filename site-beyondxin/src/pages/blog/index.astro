@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content'
+import { site } from '~/config'
+import { externalPosts } from '~/data/blog'
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import { toBlogSlug } from '~/utils/blog'
+
+interface ListPost {
+  title: string
+  pubDate: Date
+  url: string
+}
+
+const contentPosts: ListPost[] = (await getCollection('blog')).map((post) => ({
+  title: post.data.title,
+  pubDate: post.data.pubDate,
+  url: `/blog/${toBlogSlug(post.id)}/`,
+}))
+
+const posts: ListPost[] = [
+  ...contentPosts,
+  ...externalPosts.map((post) => ({
+    ...post,
+    pubDate: new Date(`${post.pubDate}T00:00:00Z`),
+  })),
+].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+
+const years = new Map<number, ListPost[]>()
+for (const post of posts) {
+  const year = post.pubDate.getUTCFullYear()
+  const group = years.get(year) ?? []
+  group.push(post)
+  years.set(year, group)
+}
+
+const postGroups = Array.from(years, ([year, group]) => ({ year, posts: group })).sort(
+  (a, b) => b.year - a.year,
+)
+
+const formatDate = (date: Date) => `${date.getUTCMonth() + 1}月${date.getUTCDate()}日`
+---
+
+<BaseLayout title="博客" description="Beyond欣的文章。" bodyClass="blog-page-layout">
+  <div class="blog-page">
+    <nav class="blog-tabs" aria-label="内容站点">
+      <span aria-current="page">博客</span>
+      <a href="https://books.beyondxin.com/" target="_blank" rel="noreferrer">Books</a>
+      <a href={site.notes} target="_blank" rel="noreferrer">Notes</a>
+    </nav>
+
+    <div class="blog-posts">
+      {
+        postGroups.map(({ year, posts: yearPosts }) => (
+          <section class="post-year" aria-labelledby={`year-${year}`}>
+            <h1 id={`year-${year}`}>{year}</h1>
+            <ul>
+              {yearPosts.map((post) => (
+                <li>
+                  {post.url.startsWith('/') ? (
+                    <a href={post.url}>{post.title}</a>
+                  ) : (
+                    <a href={post.url} target="_blank" rel="noreferrer">{post.title}</a>
+                  )}
+                  <time datetime={post.pubDate.toISOString()}>{formatDate(post.pubDate)}</time>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

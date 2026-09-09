@@ -1,0 +1,27 @@
+---
+import type { Project } from '~/data/projects'
+import ProjectIcon from './ProjectIcon.astro'
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+const categoryNames = project.categories.join(' ')
+---
+
+<article class="project-card" data-categories={categoryNames}>
+  {
+    project.githubUrl ? (
+      <a class="project-card__icon" href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} GitHub`}>
+        <ProjectIcon name={project.icon} />
+      </a>
+    ) : (
+      <span class="project-card__icon"><ProjectIcon name={project.icon} /></span>
+    )
+  }
+  <div class="project-card__content">
+    <h2><a href={project.primaryUrl} target="_blank" rel="noreferrer">{project.name}</a></h2>
+    <p>{project.description}</p>
+  </div>
+</article>

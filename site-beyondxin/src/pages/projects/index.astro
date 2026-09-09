@@ -1,0 +1,75 @@
+---
+import ProjectCard from '~/components/ProjectCard.astro'
+import { projects, type ProjectCategory } from '~/data/projects'
+import BaseLayout from '~/layouts/BaseLayout.astro'
+
+const categoryLabels: Record<ProjectCategory, string> = {
+  dev: '开发工具',
+  desktop: '桌面应用',
+  medical: '医疗影像',
+  network: '网络工具',
+  ai: 'AI',
+  game: '游戏',
+  cpp: 'C++',
+  go: 'Go',
+  typescript: 'TypeScript',
+  gdscript: 'GDScript',
+}
+
+const filters = [
+  ['all', '全部'],
+  ...Array.from(new Set(projects.flatMap((project) => project.categories))).map((category) => [
+    category,
+    categoryLabels[category],
+  ] as const),
+]
+---
+
+<BaseLayout title="作品集" description="一些我做过的项目，记录在这里。" bodyClass="portfolio-page">
+  <div class="portfolio">
+    <header class="portfolio__header">
+      <h1>作品集</h1>
+      <p>一些我做过的项目，记录在这里。</p>
+    </header>
+
+    <div class="project-filter">
+      <div class="project-filter__options" role="group" aria-label="项目分类">
+        {
+          filters.map(([value, label], index) => (
+            <button type="button" data-filter={value} aria-pressed={index === 0 ? 'true' : 'false'}>
+              {label}
+            </button>
+          ))
+        }
+      </div>
+      <span class="project-filter__count" aria-live="polite">{projects.length} 个项目</span>
+    </div>
+
+    <section class="project-list" aria-label="项目列表">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </section>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
+    const cards = document.querySelectorAll<HTMLElement>('.project-card')
+    const count = document.querySelector<HTMLElement>('.project-filter__count')
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter ?? 'all'
+        let visible = 0
+
+        buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)))
+        cards.forEach((card) => {
+          const categories = card.dataset.categories?.split(' ') ?? []
+          const show = filter === 'all' || categories.includes(filter)
+          card.hidden = !show
+          if (show) visible += 1
+        })
+
+        if (count) count.textContent = `${visible} 个项目`
+      })
+    })
+  </script>
+</BaseLayout>

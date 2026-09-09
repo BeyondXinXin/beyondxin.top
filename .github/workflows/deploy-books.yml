@@ -24,20 +24,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.21"
-      - name: Build books.beyondxin.top
+      - name: Build books.beyondxin
         run: |
-          cd site-books.beyondxin.top
+          cd site-books.beyondxin
           npm install -g pnpm
           pnpm install
           pnpm build
-      - name: Upload books.beyondxin.top
+      - name: Upload books.beyondxin
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "site-books.beyondxin.top/dist/*"
+          source: "site-books.beyondxin/dist/*"
           target: "/home/www/html/books.beyondxin.com"
           strip_components: 2
           overwrite: true
